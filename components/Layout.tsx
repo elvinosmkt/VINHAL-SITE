@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Instagram, MapPin, Phone, Mail } from 'lucide-react';
 import WhatsAppButton from './WhatsAppButton';
+import Logo from './Logo';
 import { INSTAGRAM_URL, ADDRESS } from '../constants';
 
 const Navbar: React.FC = () => {
@@ -32,21 +33,17 @@ const Navbar: React.FC = () => {
     { name: 'Contato', path: '/contato' },
   ];
 
+  const isHome = location.pathname === '/';
+
   return (
-    <nav className={`fixed w-full z-40 transition-all duration-500 ease-in-out ${
-      scrolled 
-        ? 'bg-white/90 backdrop-blur-md shadow-lg py-3' 
-        : 'bg-transparent py-6'
-    }`}>
+    <nav className={`fixed w-full z-40 transition-all duration-500 ease-in-out ${scrolled || !isHome
+      ? 'bg-white/90 backdrop-blur-md shadow-lg py-3'
+      : 'bg-transparent py-6'
+      }`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="z-50 group">
-          <div className={`text-2xl md:text-3xl font-serif font-bold tracking-widest transition-colors ${scrolled ? 'text-secondary-petrol' : 'text-secondary-petrol md:text-white'}`}>
-            IAV<span className="text-primary-gold group-hover:text-white transition-colors">.</span>
-          </div>
-          <p className={`text-[10px] md:text-[11px] tracking-[0.3em] uppercase font-light mt-1 ${scrolled ? 'text-neutral-medium' : 'text-neutral-medium md:text-white/80'}`}>
-            Instituto Acadêmico Vinhal
-          </p>
+          <Logo scrolled={scrolled || !isHome} />
         </Link>
 
         {/* Desktop Menu */}
@@ -55,11 +52,10 @@ const Navbar: React.FC = () => {
             <Link
               key={link.path}
               to={link.path}
-              className={`text-xs font-semibold tracking-[0.15em] uppercase hover:text-primary-gold transition-colors relative after:content-[''] after:absolute after:w-0 after:h-px after:bg-primary-gold after:bottom-[-4px] after:left-0 after:transition-all hover:after:w-full ${
-                location.pathname === link.path 
-                  ? 'text-primary-gold after:w-full' 
-                  : scrolled ? 'text-secondary-petrol' : 'text-white'
-              }`}
+              className={`text-xs font-semibold tracking-[0.15em] uppercase hover:text-primary-gold transition-colors relative after:content-[''] after:absolute after:w-0 after:h-px after:bg-primary-gold after:bottom-[-4px] after:left-0 after:transition-all hover:after:w-full ${location.pathname === link.path
+                ? 'text-primary-gold after:w-full'
+                : (scrolled || !isHome) ? 'text-secondary-petrol' : 'text-white'
+                }`}
             >
               {link.name}
             </Link>
@@ -68,7 +64,7 @@ const Navbar: React.FC = () => {
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noreferrer"
-            className={`${scrolled ? 'text-secondary-petrol' : 'text-white'} hover:text-primary-gold transition-transform hover:scale-110`}
+            className={`${(scrolled || !isHome) ? 'text-secondary-petrol' : 'text-white'} hover:text-primary-gold transition-transform hover:scale-110`}
           >
             <Instagram className="w-5 h-5" />
           </a>
@@ -77,17 +73,15 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`md:hidden z-50 focus:outline-none transition-colors ${
-            isOpen ? 'text-secondary-petrol' : scrolled ? 'text-secondary-petrol' : 'text-secondary-petrol'
-          }`}
+          className={`md:hidden z-50 focus:outline-none transition-colors ${isOpen || scrolled || !isHome ? 'text-secondary-petrol' : 'text-white'
+            }`}
         >
           {isOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
         </button>
 
         {/* Mobile Menu Overlay */}
-        <div className={`fixed inset-0 bg-white/95 backdrop-blur-xl z-40 flex flex-col justify-center items-center space-y-8 transition-all duration-500 ease-in-out ${
-          isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'
-        } md:hidden`}>
+        <div className={`fixed inset-0 bg-white/95 backdrop-blur-xl z-40 flex flex-col justify-center items-center space-y-8 transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'
+          } md:hidden`}>
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -118,9 +112,11 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 md:gap-8 mb-20">
           {/* Brand */}
           <div className="md:col-span-1">
-            <h3 className="text-3xl font-serif font-bold mb-6">IAV<span className="text-primary-gold">.</span></h3>
+            <Link to="/" className="mb-6 block">
+              <Logo light />
+            </Link>
             <p className="text-white/70 mb-8 font-light leading-relaxed text-sm">
-              Elevando o padrão da Harmonização Facial em Balneário Camboriú. 
+              Elevando o padrão da Harmonização Facial em Balneário Camboriú.
               Ciência, arte e excelência para pacientes e profissionais.
             </p>
             <div className="flex space-x-4">
@@ -150,9 +146,9 @@ const Footer: React.FC = () => {
               </ul>
               <div>
                 <p className="text-sm text-white/60 font-light leading-relaxed">
-                  Atendimento com hora marcada.<br/>
-                  Segunda a Sexta: 09h - 20h<br/>
-                  Sábado: 09h - 12h<br/>
+                  Atendimento com hora marcada.<br />
+                  Segunda a Sexta: 09h - 20h<br />
+                  Sábado: 09h - 12h<br />
                   Domingo: Fechado
                 </p>
               </div>

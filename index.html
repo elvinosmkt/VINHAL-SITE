@@ -1,43 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Instituto Acadêmico Vinhal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: {
-                nude: '#E9CFC4',
-                gold: '#C7A165',
-              },
-              secondary: {
-                petrol: '#1B3A4B',
-                warmGray: '#F5F1EE',
-              },
-              neutral: {
-                dark: '#1A1A1A',
-                medium: '#6B6B6B',
-                light: '#FFFFFF',
-              }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instituto Acadêmico Vinhal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              nude: '#E9CFC4',
+              gold: '#C7A165',
             },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              serif: ['Playfair Display', 'serif'],
+            secondary: {
+              petrol: '#1B3A4B',
+              warmGray: '#F5F1EE',
+            },
+            neutral: {
+              dark: '#1A1A1A',
+              medium: '#6B6B6B',
+              light: '#FFFFFF',
             }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
           }
         }
       }
-    </script>
-    <style>
-      html { scroll-behavior: smooth; }
-      .fade-in { animation: fadeIn 0.5s ease-in; }
-      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -50,7 +67,10 @@
 }
 </script>
 </head>
-  <body class="bg-neutral-light text-neutral-dark antialiased selection:bg-primary-nude selection:text-secondary-petrol">
-    <div id="root"></div>
-  </body>
+
+<body class="bg-neutral-light text-neutral-dark antialiased selection:bg-primary-nude selection:text-secondary-petrol">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>

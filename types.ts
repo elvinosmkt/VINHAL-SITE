@@ -23,6 +23,7 @@ export interface Course {
   date: string;
   details: string[];
   imageUrl: string;
+  price?: string;
 }
 
 export interface Testimonial {
